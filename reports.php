@@ -1,5 +1,7 @@
 <?php
   /* Author: Peter Somers
+   * This script returns a JSON array with all the values for a given indicator from a
+   * desired start date to an end date.
    */
   require_once 'db.php';
   $start_date = filter_input( INPUT_GET, 'start_date' );
