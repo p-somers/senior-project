@@ -1,3 +1,4 @@
+//The site can dynamically scroll between multiple pages with a cool scrolling effect
 var current_page;
 
 function init() {
@@ -58,6 +59,9 @@ function init() {
   console.log( pages[ 0 ].style.left );
 }
 
+/**
+ * This animates a scroll to the selected page
+ */
 function scrollTo( index, pages, location, move_amount ) {
   for( var i = 0; i < pages.length; i++ ) {
     var newval = parseInt( pages[ i ].style.left ) + move_amount;
@@ -71,18 +75,18 @@ function scrollTo( index, pages, location, move_amount ) {
 function setDatePickers() {//From Jesse's work, slightly edited by Peter
     jQuery( "#from" ).datepicker( {
       maxDate: -1,
-      onClose: function( selectedDate ) {
+      onClose: function( selectedDate ) {
         if( selectedDate.length > 0 )
           $( "#to" ).datepicker( "option", "minDate", selectedDate );
-      }
-    });
+      }
+    });
     jQuery( "#to" ).datepicker( {
       maxDate: -1,
-      onClose: function( selectedDate ) {
+      onClose: function( selectedDate ) {
         if( selectedDate.length > 0 )
           $( "#from" ).datepicker( "option", "maxDate", selectedDate );
-      }
-    });
+      }
+    });
   };
 
 function get_report() {
@@ -118,18 +122,13 @@ function get_report() {
 }
 
 function graph( ret, arr ) {
-  console.log( 'returned: ' + ret );
-  
-  var results = JSON.parse( ret );//[ arr[ 0 ] ].replace(/\&amp\;/gi, "&");
-  //console.log( 'results: ' + results );
-  //$( '#graphs' ).html( 'hi'+'<img src="' + results + '">' );
+  var results = JSON.parse( ret );
   $( '#graphs' ).html( '' );
   var graphs = '<ul>';
   for( var i = 0; i < arr.length; i++ )
   graphs = graphs + '<li><a href="#tabs-'+(i+1)+'">'+arr[i]+'</a></li>';
   graphs = graphs + '</ul>'; 
   for( var i = 0; i < 1; i++ )
-    //$( '#graphs' ).html( '<img src="' + results[ arr[ i ] ] + '">' );
     graphs = graphs + '<div id="#tabs-'+(i+1)+'"><img src="'+results[arr[i]].replace(/\&amp\;/gi, "&")+'"></div>';
   $( '#graphs' ).html( graphs );
   $( '#graphs' ).tabs();
